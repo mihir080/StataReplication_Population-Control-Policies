@@ -5,7 +5,7 @@ capture log close
 
 cd "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Sem 2/644/HW/HW 1"
 use Dataset.dta, replace 
-log using HW1.log, replace
+log using Replication_Fertility.log, replace
 
 ********************************************************************************
 
