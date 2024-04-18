@@ -3,7 +3,7 @@
        log:  /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Rep
 > lication_Fertility.log
   log type:  text
- opened on:  17 Apr 2024, 23:57:02
+ opened on:  18 Apr 2024, 00:03:57
 
 . 
 . ********************************************************************************
@@ -125,6 +125,10 @@ gov_famplan    1871      6         .         .         .  Govt support for famil
 . 
 . // Replicating the figures of the paper
 . 
+. shell mkdir "`current_dir'/figures", replace // Creating a new folder to store the images
+
+
+. 
 . // FIGURE 1
 . 
 . quietly {
@@ -138,10 +142,9 @@ gov_famplan    1871      6         .         .         .  Govt support for famil
 > name(fig1, replace)
 
 . 
-. graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/
-> Figures/Figure1.png", replace
+. graph export "`current_dir'/figures/fig1.png", replace
 file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
-    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure1.png saved as PNG format
+    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/figures/fig1.png saved as PNG format
 
 . 
 . 
@@ -152,8 +155,8 @@ file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
 . collapse (mean) TFR [fw=population], by(wbregion year)
 
 . save `fig3', replace
-(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10137.000001 not found)
-file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10137.000001 saved as .dta format
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10241.000001 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10241.000001 saved as .dta format
 
 . 
 . codebook wbregion /// To get the index codes for each of the regions
@@ -255,10 +258,9 @@ file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
 
 . 
 . save `fig5', replace
-(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10137.000002 not found)
-file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10137.000002 saved as .dta format
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10241.000002 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10241.000002 saved as .dta format
 
-. 
 . 
 . 
 end of do-file

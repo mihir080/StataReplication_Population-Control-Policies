@@ -1,9 +1,9 @@
-clear 
+clear all
 
 set more off
 capture log close 
 
-cd "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence"
+local current_dir "`c(pwd)'"
 use Dataset.dta, replace 
 log using Replication_Fertility.log, replace
 
@@ -22,6 +22,8 @@ codebook, compact
 ********************************************************************************
 
 // Replicating the figures of the paper
+
+shell mkdir "`current_dir'/figures" // Creating a new folder to store the images
 
 // FIGURE 1
 
@@ -45,9 +47,9 @@ histogram TFR if year == 2013, bin(15) xscale(range(0 10)) legend(off) ///
 graph combine trf60 trf70 trf80 trf90 trf00 trf13, ycommon xcommon ///
 title("Panel Chart Of TRF's Across Periods") ///
 note("Data: Population Control Policies and Fertility Convergence") ///
-name(fig1, replace)
+name(fig1)
 
-graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure1.png", replace
+** graph export "`current_dir'/figures/fig1.png", replace
 
 
 // FIGURE 2
@@ -58,9 +60,9 @@ save `fig3', replace
 
 codebook wbregion /// To get the index codes for each of the regions
 
-twoway (line TFR year if wbregion == 1) (line TFR year if wbregion == 2, lpattern(dash)) (line TFR year if wbregion == 3, lpattern(longdash)) (line TFR year if wbregion == 4, lpattern(longdash_dot)) (line TFR year if wbregion == 5, lpattern(shortdash)) (line TFR year if wbregion == 6, lpattern(shortdash_dot)) (line TFR year if wbregion == 7, lpattern(dash_dot)), ytitle("Total Fertility Rate") xtitle("Years") legend(order(1 "North America" 2 "Europe and Central Asia" 3 "East Asia and Pacific" 4 "Latin America" 5 "Middle East and North Africa" 6 "South Asia" 7 "Sub Saharan Africa") size(small) span position(6) rows(2)) title("Total Fertility Rate Across Periods By Region") note("Data: de Silva, Tenreyro 2017") name(fig2, replace)
+twoway (line TFR year if wbregion == 1) (line TFR year if wbregion == 2, lpattern(dash)) (line TFR year if wbregion == 3, lpattern(longdash)) (line TFR year if wbregion == 4, lpattern(longdash_dot)) (line TFR year if wbregion == 5, lpattern(shortdash)) (line TFR year if wbregion == 6, lpattern(shortdash_dot)) (line TFR year if wbregion == 7, lpattern(dash_dot)), ytitle("Total Fertility Rate") xtitle("Years") legend(order(1 "North America" 2 "Europe and Central Asia" 3 "East Asia and Pacific" 4 "Latin America" 5 "Middle East and North Africa" 6 "South Asia" 7 "Sub Saharan Africa") size(small) span position(6) rows(2)) title("Total Fertility Rate Across Periods By Region") note("Data: de Silva, Tenreyro 2017") name(fig2)
 
-graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure2.png", replace
+** graph export "`current_dir'/figures/fig2.png", replace
 
 use Dataset.dta, replace 
 
@@ -68,13 +70,13 @@ use Dataset.dta, replace
 
 twoway (scatter TFR ln_gdp if year == 1960, msymbol(circle) mfcolor(white)) (lowess TFR ln_gdp if year == 1960 & wbregion!=.) (scatter TFR ln_gdp if year == 2013, msymbol(triangle) mfcolor(blue)) (lowess TFR ln_gdp if year == 2013 & wbregion!=.), legend(order(1 "1960" 3 "2013" 2 "Fitted 1960" 4 "Fitted 2013") rows(1) size(small) position(6)) title("Fertility GDP Relation in 1960 & 2013") ytitle("TFR") xtitle("GDP per capita ($)") note("Data: de Silva, Tenreyro 2017") name(fig3, replace)
 
-graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure3.png", replace
+** graph export "`current_dir'/figures/fig3.png", replace
 
 // FIGURE 4
 
-twoway (scatter TFR urban_pop_tot if year == 1960, msymbol(circle) mfcolor(white)) (lowess TFR urban_pop_tot if year == 1960 & wbregion!=.) (scatter TFR urban_pop_tot if year == 2013, msymbol(triangle) mfcolor(blue)) (lowess TFR urban_pop_tot if year == 2013 & wbregion!=.), legend(order(1 "1960" 3 "2013" 2 "Fitted 1960" 4 "Fitted 2013") rows(1) size(small) position(6)) title("Fertility Population Relation in 1960 & 2013") ytitle("TFR") xtitle("Urban Population (as a % of total population)") note("Data: de Silva, Tenreyro 2017") name(fig3, replace)
+twoway (scatter TFR urban_pop_tot if year == 1960, msymbol(circle) mfcolor(white)) (lowess TFR urban_pop_tot if year == 1960 & wbregion!=.) (scatter TFR urban_pop_tot if year == 2013, msymbol(triangle) mfcolor(blue)) (lowess TFR urban_pop_tot if year == 2013 & wbregion!=.), legend(order(1 "1960" 3 "2013" 2 "Fitted 1960" 4 "Fitted 2013") rows(1) size(small) position(6)) title("Fertility Population Relation in 1960 & 2013") ytitle("TFR") xtitle("Urban Population (as a % of total population)") note("Data: de Silva, Tenreyro 2017") name(fig3)
 
-graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure4.png", replace
+** graph export "`current_dir'/figures/fig4.png", replace
 
 // FIGURE 5
 
@@ -90,7 +92,7 @@ collapse (mean) TFR [fw=population], by(year fpcode76all) //Collapsing data to k
 
 twoway (line TFR year if fpcode76all == 1) (line TFR year if fpcode76all == 2) (line TFR year if fpcode76all == 3) (line TFR year if fpcode76all == 4) if year > 1959 & year < 2011, xlabel(1960(10)2011) legend(order(1 "Lower" 2 "No Intervention" 3 "Maintain" 4 "Raise") size(small) span position(6) rows(2)) xscale(range(1960 2011)) ytitle("Mean TFR") xtitle("Years") title("Fertility Rates by Policy in 1976") note("Data: de Silva, Tenreyro 2017") name(fig5, replace)
 
-graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure5.png", replace
+** graph export "`current_dir'/figures/fig5.png", replace
 
 save `fig5', replace
 
