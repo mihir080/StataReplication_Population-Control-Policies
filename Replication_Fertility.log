@@ -1,0 +1,265 @@
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Rep
+> lication_Fertility.log
+  log type:  text
+ opened on:  17 Apr 2024, 23:57:02
+
+. 
+. ********************************************************************************
+. 
+. // We will check the variables and get a descriptive stats of the dataset
+. 
+. describe
+
+Contains data from Dataset.dta
+ Observations:        13,457                  
+    Variables:            26                  7 Jun 2017 14:34
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+country         str244  %244s                 Country
+CountryCode     str3    %9s                   Country Code
+year            double  %10.0g                Time
+wbregion        float   %28.0g     wbregion   
+aggregate       float   %9.0g                 
+TFR             double  %10.0g                Fertility rate, total (births per woman) [SP.DYN.TFRT.IN]
+yr_sch          float   %7.2f                 Years of Schooling 25+ population (2015 is for 25-64 pop)
+IMR             double  %10.0g                Mortality rate, infant (per 1,000 live births) [SP.DYN.IMRT.IN]
+gdp_percapita   double  %10.0g                GDP per capita (constant 2010 US$) [NY.GDP.PCAP.KD]
+exposure_FP     float   %9.0g                 % of women hearing about FP through mass media
+population      double  %10.0g                Population, total [SP.POP.TOTL]
+FPP_gov_perca~a double  %10.0g                Govt family planning funds per capita (in US cents)
+FPP_total_per~a double  %10.0g                Total family planning funds per capita (in US cents)
+FPP_all_funds1  float   %9.0g                 
+FPP_govt_funds1 float   %9.0g                 
+ln_gdp          float   %9.0g                 
+yr_sch_women    float   %7.2f                 Years of schooling (women aged 25+)
+urban_pop_tot   double  %10.0g                Urban population (% of total) [SP.URB.TOTL.IN.ZS]
+FPA_year        float   %9.0g                 
+state_parti_y~r float   %9.0g                 
+fem_lfpr        float   %9.0g                 Merged variable from 1980-2013
+prog_effort_s~e byte    %10.0g                
+CPI_2005        double  %10.0g                Consumer price index for USA (2005=100)
+nominal_GDP     double  %10.0g                GDP (current US$)
+fertpolicy      str17   %17s                  Policy on fertility (from UN Population Policy database)
+gov_famplan     str17   %17s                  Govt support for family planning (from UN Pop Policy database)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sorted by: 
+
+. 
+. summarize 
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+     country |          0
+ CountryCode |          0
+        year |     13,457    1987.014    15.41321       1960       2013
+    wbregion |     11,556    4.102804    1.901555          1          7
+   aggregate |     13,426    .1312379    .3376729          0          1
+-------------+---------------------------------------------------------
+         TFR |     10,976     4.11088    2.021633       .827      8.873
+      yr_sch |      1,584    5.454938    3.275679          0   13.42363
+         IMR |     10,802    56.41501     46.2217        1.6      276.9
+gdp_percap~a |      8,442    10071.52    15305.06   115.4357   145221.2
+ exposure_FP |        180    51.34889    18.35238       13.5       96.1
+-------------+---------------------------------------------------------
+  population |     12,047    6.73e+07    3.87e+08       4279   7.13e+09
+FPP_gov_pe~a |        367    26.49125    34.06951          0     206.05
+FPP_total_~a |        378    39.25341    48.00564        .14        355
+FPP_all_fu~1 |        378    4.83e+07    5.02e+08       5000   9.20e+09
+FPP_govt_f~1 |        367    1.36e+08    2.30e+09          0   4.40e+10
+-------------+---------------------------------------------------------
+      ln_gdp |      8,442    8.191409    1.503722   4.748713   11.88601
+yr_sch_women |      1,584    4.969819    3.429159          0    13.4415
+urban_pop_~t |     13,256    49.29594    25.17978      2.077        100
+    FPA_year |      1,188    1960.545    5.239548       1949       1967
+state_part~r |      1,728     1966.25    6.166198       1947       1981
+-------------+---------------------------------------------------------
+    fem_lfpr |      6,400    50.09063     17.1774        8.5       90.8
+prog_effor~e |        458    38.71616    23.65845          0         92
+    CPI_2005 |     11,338    .5698612    .3258859   .1515418   1.151811
+ nominal_GDP |      9,592    7.00e+11    3.42e+12    8824448   4.94e+13
+  fertpolicy |          0
+-------------+---------------------------------------------------------
+ gov_famplan |          0
+
+. 
+. codebook, compact
+
+Variable        Obs Unique      Mean       Min       Max  Label
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+country       13457    259         .         .         .  Country
+CountryCode   13426    254         .         .         .  Country Code
+year          13457     54  1987.014      1960      2013  Time
+wbregion      11556      7  4.102804         1         7  
+aggregate     13426      2  .1312379         0         1  
+TFR           10976   5210   4.11088      .827     8.873  Fertility rate, total (births per woman) [SP.DYN.TFRT.IN]
+yr_sch         1584   1584  5.454938         0  13.42363  Years of Schooling 25+ population (2015 is for 25-64 pop)
+IMR           10802   2845  56.41501       1.6     276.9  Mortality rate, infant (per 1,000 live births) [SP.DYN.IMRT.IN]
+gdp_percap~a   8442   8442  10071.52  115.4357  145221.2  GDP per capita (constant 2010 US$) [NY.GDP.PCAP.KD]
+exposure_FP     180    159  51.34889      13.5      96.1  % of women hearing about FP through mass media
+population    12047  11995  6.73e+07      4279  7.13e+09  Population, total [SP.POP.TOTL]
+FPP_gov_pe~a    367    262  26.49125         0    206.05  Govt family planning funds per capita (in US cents)
+FPP_total_~a    378    306  39.25341       .14       355  Total family planning funds per capita (in US cents)
+FPP_all_fu~1    378    373  4.83e+07      5000  9.20e+09  
+FPP_govt_f~1    367    334  1.36e+08         0  4.40e+10  
+ln_gdp         8442   8435  8.191409  4.748713  11.88601  
+yr_sch_women   1584   1584  4.969819         0   13.4415  Years of schooling (women aged 25+)
+urban_pop_~t  13256  12128  49.29594     2.077       100  Urban population (% of total) [SP.URB.TOTL.IN.ZS]
+FPA_year       1188     13  1960.545      1949      1967  
+state_part~r   1728     16   1966.25      1947      1981  
+fem_lfpr       6400    906  50.09063       8.5      90.8  Merged variable from 1980-2013
+prog_effor~e    458     84  38.71616         0        92  
+CPI_2005      11338     52  .5698612  .1515418  1.151811  Consumer price index for USA (2005=100)
+nominal_GDP    9592   9585  7.00e+11   8824448  4.94e+13  GDP (current US$)
+fertpolicy     1871      4         .         .         .  Policy on fertility (from UN Population Policy database)
+gov_famplan    1871      6         .         .         .  Govt support for family planning (from UN Pop Policy database)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+. 
+. ********************************************************************************
+. *                                                                       Figures                                                                    *
+. ********************************************************************************
+. 
+. // Replicating the figures of the paper
+. 
+. // FIGURE 1
+. 
+. quietly {
+
+. 
+. // Combining the individual histograms to create a panel chart for better comparison
+. 
+. graph combine trf60 trf70 trf80 trf90 trf00 trf13, ycommon xcommon ///
+> title("Panel Chart Of TRF's Across Periods") ///
+> note("Data: Population Control Policies and Fertility Convergence") ///
+> name(fig1, replace)
+
+. 
+. graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/
+> Figures/Figure1.png", replace
+file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
+    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure1.png saved as PNG format
+
+. 
+. 
+. // FIGURE 2
+. 
+. tempfile fig3 // Saving the collapsed dataset for easy reference
+
+. collapse (mean) TFR [fw=population], by(wbregion year)
+
+. save `fig3', replace
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10137.000001 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10137.000001 saved as .dta format
+
+. 
+. codebook wbregion /// To get the index codes for each of the regions
+> 
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+wbregion                                                                                                                                          (unlabeled)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (float)
+                 Label: wbregion
+
+                 Range: [1,7]                         Units: 1
+         Unique values: 7                         Missing .: 54/432
+
+            Tabulation: Freq.   Numeric  Label
+                           54         1  North America
+                           54         2  Europe
+                           54         3  East Asia and Pacific
+                           54         4  Latin America and Caribbean
+                           54         5  Middle East and North Africa
+                           54         6  South Asia
+                           54         7  Sub Saharan Africa
+                           54         .  
+
+. twoway (line TFR year if wbregion == 1) (line TFR year if wbregion == 2, lpattern(dash)) (line TFR year if wbregion == 3, lpattern(longdash)) (line TFR yea
+> r if wbregion == 4, lpattern(longdash_dot)) (line TFR year if wbregion == 5, lpattern(shortdash)) (line TFR year if wbregion == 6, lpattern(shortdash_dot))
+>  (line TFR year if wbregion == 7, lpattern(dash_dot)), ytitle("Total Fertility Rate") xtitle("Years") legend(order(1 "North America" 2 "Europe and Central 
+> Asia" 3 "East Asia and Pacific" 4 "Latin America" 5 "Middle East and North Africa" 6 "South Asia" 7 "Sub Saharan Africa") size(small) span position(6) rows
+> (2)) title("Total Fertility Rate Across Periods By Region") note("Data: de Silva, Tenreyro 2017") name(fig2, replace)
+
+. 
+. graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/
+> Figures/Figure2.png", replace
+file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
+    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure2.png saved as PNG format
+
+. 
+. use Dataset.dta, replace 
+
+. 
+. // FIGURE 3
+. 
+. twoway (scatter TFR ln_gdp if year == 1960, msymbol(circle) mfcolor(white)) (lowess TFR ln_gdp if year == 1960 & wbregion!=.) (scatter TFR ln_gdp if year =
+> = 2013, msymbol(triangle) mfcolor(blue)) (lowess TFR ln_gdp if year == 2013 & wbregion!=.), legend(order(1 "1960" 3 "2013" 2 "Fitted 1960" 4 "Fitted 2013")
+>  rows(1) size(small) position(6)) title("Fertility GDP Relation in 1960 & 2013") ytitle("TFR") xtitle("GDP per capita ($)") note("Data: de Silva, Tenreyro 
+> 2017") name(fig3, replace)
+
+. 
+. graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/
+> Figures/Figure3.png", replace
+file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
+    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure3.png saved as PNG format
+
+. 
+. // FIGURE 4
+. 
+. twoway (scatter TFR urban_pop_tot if year == 1960, msymbol(circle) mfcolor(white)) (lowess TFR urban_pop_tot if year == 1960 & wbregion!=.) (scatter TFR ur
+> ban_pop_tot if year == 2013, msymbol(triangle) mfcolor(blue)) (lowess TFR urban_pop_tot if year == 2013 & wbregion!=.), legend(order(1 "1960" 3 "2013" 2 "F
+> itted 1960" 4 "Fitted 2013") rows(1) size(small) position(6)) title("Fertility Population Relation in 1960 & 2013") ytitle("TFR") xtitle("Urban Population 
+> (as a % of total population)") note("Data: de Silva, Tenreyro 2017") name(fig3, replace)
+
+. 
+. graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/
+> Figures/Figure4.png", replace
+file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
+    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure4.png saved as PNG format
+
+. 
+. // FIGURE 5
+. 
+. tempfile fig5 // Saving the collapsed dataset for easy reference
+
+. 
+. encode fertpolicy, gen(fpcode) //Encoding the fertility policy
+
+. 
+. gen fpcode76 = fpcode if year == 1976 //Generating a variable with encoded fertility policy for each country for the year 1976
+(13,307 missing values generated)
+
+. 
+. egen fpcode76all=mean(fpcode76) if wbregion!=., by(country) //fitting 1976 values of fertility policy across countries
+(5,465 missing values generated)
+
+. 
+. collapse (mean) TFR [fw=population], by(year fpcode76all) //Collapsing data to keep actual TFR and TFR at the time of fertility policies in 1976
+
+. 
+. twoway (line TFR year if fpcode76all == 1) (line TFR year if fpcode76all == 2) (line TFR year if fpcode76all == 3) (line TFR year if fpcode76all == 4) if y
+> ear > 1959 & year < 2011, xlabel(1960(10)2011) legend(order(1 "Lower" 2 "No Intervention" 3 "Maintain" 4 "Raise") size(small) span position(6) rows(2)) xsc
+> ale(range(1960 2011)) ytitle("Mean TFR") xtitle("Years") title("Fertility Rates by Policy in 1976") note("Data: de Silva, Tenreyro 2017") name(fig5, replac
+> e)
+
+. 
+. graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/
+> Figures/Figure5.png", replace
+file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
+    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure5.png saved as PNG format
+
+. 
+. save `fig5', replace
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10137.000002 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10137.000002 saved as .dta format
+
+. 
+. 
+. 
+end of do-file
+
