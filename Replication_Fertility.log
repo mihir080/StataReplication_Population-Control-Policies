@@ -3,7 +3,7 @@
        log:  /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Rep
 > lication_Fertility.log
   log type:  text
- opened on:  18 Apr 2024, 00:03:57
+ opened on:  21 Apr 2024, 21:11:59
 
 . 
 . ********************************************************************************
@@ -125,8 +125,9 @@ gov_famplan    1871      6         .         .         .  Govt support for famil
 . 
 . // Replicating the figures of the paper
 . 
-. shell mkdir "`current_dir'/figures", replace // Creating a new folder to store the images
+. shell mkdir "`current_dir'/figures" // Creating a new folder to store the images
 
+mkdir: /figures: Read-only file system
 
 . 
 . // FIGURE 1
@@ -139,13 +140,10 @@ gov_famplan    1871      6         .         .         .  Govt support for famil
 . graph combine trf60 trf70 trf80 trf90 trf00 trf13, ycommon xcommon ///
 > title("Panel Chart Of TRF's Across Periods") ///
 > note("Data: Population Control Policies and Fertility Convergence") ///
-> name(fig1, replace)
+> name(fig1)
 
 . 
-. graph export "`current_dir'/figures/fig1.png", replace
-file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
-    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/figures/fig1.png saved as PNG format
-
+. ** graph export "`current_dir'/figures/fig1.png", replace
 . 
 . 
 . // FIGURE 2
@@ -155,8 +153,8 @@ file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
 . collapse (mean) TFR [fw=population], by(wbregion year)
 
 . save `fig3', replace
-(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10241.000001 not found)
-file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10241.000001 saved as .dta format
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000001 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000001 saved as .dta format
 
 . 
 . codebook wbregion /// To get the index codes for each of the regions
@@ -186,14 +184,10 @@ wbregion                                                                        
 > r if wbregion == 4, lpattern(longdash_dot)) (line TFR year if wbregion == 5, lpattern(shortdash)) (line TFR year if wbregion == 6, lpattern(shortdash_dot))
 >  (line TFR year if wbregion == 7, lpattern(dash_dot)), ytitle("Total Fertility Rate") xtitle("Years") legend(order(1 "North America" 2 "Europe and Central 
 > Asia" 3 "East Asia and Pacific" 4 "Latin America" 5 "Middle East and North Africa" 6 "South Asia" 7 "Sub Saharan Africa") size(small) span position(6) rows
-> (2)) title("Total Fertility Rate Across Periods By Region") note("Data: de Silva, Tenreyro 2017") name(fig2, replace)
+> (2)) title("Total Fertility Rate Across Periods By Region") note("Data: de Silva, Tenreyro 2017") name(fig2)
 
 . 
-. graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/
-> Figures/Figure2.png", replace
-file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
-    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure2.png saved as PNG format
-
+. ** graph export "`current_dir'/figures/fig2.png", replace
 . 
 . use Dataset.dta, replace 
 
@@ -203,28 +197,20 @@ file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
 . twoway (scatter TFR ln_gdp if year == 1960, msymbol(circle) mfcolor(white)) (lowess TFR ln_gdp if year == 1960 & wbregion!=.) (scatter TFR ln_gdp if year =
 > = 2013, msymbol(triangle) mfcolor(blue)) (lowess TFR ln_gdp if year == 2013 & wbregion!=.), legend(order(1 "1960" 3 "2013" 2 "Fitted 1960" 4 "Fitted 2013")
 >  rows(1) size(small) position(6)) title("Fertility GDP Relation in 1960 & 2013") ytitle("TFR") xtitle("GDP per capita ($)") note("Data: de Silva, Tenreyro 
-> 2017") name(fig3, replace)
+> 2017") name(fig3)
 
 . 
-. graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/
-> Figures/Figure3.png", replace
-file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
-    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure3.png saved as PNG format
-
+. ** graph export "`current_dir'/figures/fig3.png", replace
 . 
 . // FIGURE 4
 . 
 . twoway (scatter TFR urban_pop_tot if year == 1960, msymbol(circle) mfcolor(white)) (lowess TFR urban_pop_tot if year == 1960 & wbregion!=.) (scatter TFR ur
 > ban_pop_tot if year == 2013, msymbol(triangle) mfcolor(blue)) (lowess TFR urban_pop_tot if year == 2013 & wbregion!=.), legend(order(1 "1960" 3 "2013" 2 "F
 > itted 1960" 4 "Fitted 2013") rows(1) size(small) position(6)) title("Fertility Population Relation in 1960 & 2013") ytitle("TFR") xtitle("Urban Population 
-> (as a % of total population)") note("Data: de Silva, Tenreyro 2017") name(fig3, replace)
+> (as a % of total population)") note("Data: de Silva, Tenreyro 2017") name(fig4)
 
 . 
-. graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/
-> Figures/Figure4.png", replace
-file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
-    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure4.png saved as PNG format
-
+. ** graph export "`current_dir'/figures/fig4.png", replace
 . 
 . // FIGURE 5
 . 
@@ -247,21 +233,1704 @@ file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
 . 
 . twoway (line TFR year if fpcode76all == 1) (line TFR year if fpcode76all == 2) (line TFR year if fpcode76all == 3) (line TFR year if fpcode76all == 4) if y
 > ear > 1959 & year < 2011, xlabel(1960(10)2011) legend(order(1 "Lower" 2 "No Intervention" 3 "Maintain" 4 "Raise") size(small) span position(6) rows(2)) xsc
-> ale(range(1960 2011)) ytitle("Mean TFR") xtitle("Years") title("Fertility Rates by Policy in 1976") note("Data: de Silva, Tenreyro 2017") name(fig5, replac
-> e)
+> ale(range(1960 2011)) ytitle("Mean TFR") xtitle("Years") title("Fertility Rates by Policy in 1976") note("Data: de Silva, Tenreyro 2017") name(fig5)
 
 . 
-. graph export "/Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility Replication/replication_Population-Control-Policies-and-Fertility-Convergence/
-> Figures/Figure5.png", replace
-file /Users/mihir/Documents/D Drive/Mihir Docs UMD/Python/Fertility
-    Replication/replication_Population-Control-Policies-and-Fertility-Convergence/Figures/Figure5.png saved as PNG format
-
+. ** graph export "`current_dir'/figures/fig5.png", replace
 . 
 . save `fig5', replace
-(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10241.000002 not found)
-file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_10241.000002 saved as .dta format
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000002 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000002 saved as .dta format
 
 . 
+. ********************************************************************************
+. *                                                                       Tables                                                                     *
+. ********************************************************************************
+. 
+. clear all
+
+. 
+. use Dataset.dta, replace 
+
+. 
+. ********************************************************************************
+. 
+. // TABLE 1
+. 
+. tabulate year fertpolicy if year == 1976 | year == 1986 | year == 1996 | year == 2005 | year == 2013
+
+           |   Policy on fertility (from UN Population
+           |              Policy database)
+      Time |     Lower   Maintain  No inte..      Raise |     Total
+-----------+--------------------------------------------+----------
+      1976 |        40         19         78         13 |       150 
+      1986 |        54         16         75         19 |       164 
+      1996 |        82         19         65         27 |       193 
+      2005 |        78         31         47         38 |       194 
+      2013 |        84         33         26         54 |       197 
+-----------+--------------------------------------------+----------
+     Total |       338        118        291        151 |       898 
+
+. 
+. // TABLE 2
+. 
+. tab year gov_famplan if year == 1976 | year == 1986 | year == 1996 | year == 2005 | year == 2013
+
+           |  Govt support for family planning (from UN Pop Policy database)
+      Time | Direct ..  Indirec..     Limits  No data..  No supp..  Not per.. |     Total
+-----------+------------------------------------------------------------------+----------
+      1976 |        95         17         10          0         28          0 |       150 
+      1986 |       117         22          7          0         18          0 |       164 
+      1996 |       143         18          2          4         26          0 |       193 
+      2005 |       143         35          1          0         15          0 |       194 
+      2013 |       160         20          0          0         16          1 |       197 
+-----------+------------------------------------------------------------------+----------
+     Total |       658        112         20          4        103          1 |       898 
+
+. 
+. // TABLE 3
+. 
+. tempfile source // A file that contains only the names and codes of the countries. 
+
+. 
+. collapse (first) CountryCode if wbregion!=., by(country)
+
+. 
+. save `source', replace
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000003 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000003 saved as .dta format
+
 . 
 end of do-file
 
+. save `source', replace
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000003 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000003 saved as .dta format
+
+. 
+. //
+/ is not a valid command name
+r(199);
+
+. 
+. clear all
+
+. use Dataset.dta, replace
+
+. 
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//SD18118.000000"
+
+. clear all
+
+. 
+. use Dataset.dta, replace 
+
+. 
+end of do-file
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//SD18118.000000"
+
+. save Dataset.dta, replace
+file Dataset.dta saved
+
+. tempfile source // A file that contains only the names and codes of the countries. 
+
+. collapse (first) CountryCode if wbregion!=., by(country)
+
+. save `source', replace
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000001 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000001 saved as .dta format
+
+. 
+end of do-file
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//SD18118.000000"
+
+. clear all
+
+. use Dataset.dta, replace
+
+. tempfile TFR1960 // A file that contains the names and codes of countries and TFR in 1960.
+
+. keep if year == 1960
+(13,232 observations deleted)
+
+. keep country CountryCode TFR
+
+. rename TFR TFR1960
+
+. save `TFR1960', replace
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000001 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000001 saved as .dta format
+
+. 
+end of do-file
+
+. clear all
+
+. use source
+file source.dta not found
+r(601);
+
+. use `source', replace
+invalid file specification
+r(198);
+
+. clear all
+
+. 
+. use Dataset.dta, replace 
+
+. tempfile source // A file that contains only the names and codes of the countries. 
+_/ invalid name
+r(198);
+
+. collapse (first) CountryCode if wbregion!=., by(country)
+
+. save `source', replace
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000001 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000001 saved as .dta format
+
+. clear 
+
+. use `source', replace
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//SD18118.000000"
+
+. clear all
+
+. 
+. use Dataset.dta, replace 
+
+. 
+. ********************************************************************************
+. 
+. // TABLE 1
+. 
+. tabulate year fertpolicy if year == 1976 | year == 1986 | year == 1996 | year == 2005 | year == 2013
+
+           |   Policy on fertility (from UN Population
+           |              Policy database)
+      Time |     Lower   Maintain  No inte..      Raise |     Total
+-----------+--------------------------------------------+----------
+      1976 |        40         19         78         13 |       150 
+      1986 |        54         16         75         19 |       164 
+      1996 |        82         19         65         27 |       193 
+      2005 |        78         31         47         38 |       194 
+      2013 |        84         33         26         54 |       197 
+-----------+--------------------------------------------+----------
+     Total |       338        118        291        151 |       898 
+
+. 
+. // TABLE 2
+. 
+. tab year gov_famplan if year == 1976 | year == 1986 | year == 1996 | year == 2005 | year == 2013
+
+           |  Govt support for family planning (from UN Pop Policy database)
+      Time | Direct ..  Indirec..     Limits  No data..  No supp..  Not per.. |     Total
+-----------+------------------------------------------------------------------+----------
+      1976 |        95         17         10          0         28          0 |       150 
+      1986 |       117         22          7          0         18          0 |       164 
+      1996 |       143         18          2          4         26          0 |       193 
+      2005 |       143         35          1          0         15          0 |       194 
+      2013 |       160         20          0          0         16          1 |       197 
+-----------+------------------------------------------------------------------+----------
+     Total |       658        112         20          4        103          1 |       898 
+
+. 
+. // TABLE 3
+. 
+. // Preparing the data for mutation
+. 
+. save Dataset.dta, replace
+file Dataset.dta saved
+
+. tempfile source // A file that contains only the names and codes of the countries. 
+
+. collapse (first) CountryCode if wbregion!=., by(country)
+
+. save `source', replace
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000002 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000002 saved as .dta format
+
+. 
+. //
+. 
+. clear
+
+. use Dataset.dta, replace
+
+. tempfile TFR1960 // A file that contains the names and codes of countries and TFR in 1960.
+
+. keep if year == 1960
+(13,232 observations deleted)
+
+. keep country CountryCode TFR
+
+. rename TFR TFR1960
+
+. save `TFR1960', replace
+(file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000003 not found)
+file /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//S_18118.000003 saved as .dta format
+
+. 
+end of do-file
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//SD18118.000000"
+
+. use `source', replace
+invalid file specification
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000gn/T//SD18118.000000"
+
+. clear all
+
+. 
+. use Dataset.dta, replace 
+
+. 
+. ********************************************************************************
+. 
+. // TABLE 1
+. 
+. tabulate year fertpolicy if year == 1976 | year == 1986 | year == 1996 | year == 2005 | year == 2013
+
+           |   Policy on fertility (from UN Population
+           |              Policy database)
+      Time |     Lower   Maintain  No inte..      Raise |     Total
+-----------+--------------------------------------------+----------
+      1976 |        40         19         78         13 |       150 
+      1986 |        54         16         75         19 |       164 
+      1996 |        82         19         65         27 |       193 
+      2005 |        78         31         47         38 |       194 
+      2013 |        84         33         26         54 |       197 
+-----------+--------------------------------------------+----------
+     Total |       338        118        291        151 |       898 
+
+. 
+. // TABLE 2
+. 
+. tab year gov_famplan if year == 1976 | year == 1986 | year == 1996 | year == 2005 | year == 2013
+
+           |  Govt support for family planning (from UN Pop Policy database)
+      Time | Direct ..  Indirec..     Limits  No data..  No supp..  Not per.. |     Total
+-----------+------------------------------------------------------------------+----------
+      1976 |        95         17         10          0         28          0 |       150 
+      1986 |       117         22          7          0         18          0 |       164 
+      1996 |       143         18          2          4         26          0 |       193 
+      2005 |       143         35          1          0         15          0 |       194 
+      2013 |       160         20          0          0         16          1 |       197 
+-----------+------------------------------------------------------------------+----------
+     Total |       658        112         20          4        103          1 |       898 
+
+. 
+. // TABLE 3
+. 
+. // Preparing the data for mutation
+. 
+. save Dataset.dta, replace
+file Dataset.dta saved
+
+. tempfile source // A file that contains only the names and codes of the countries. 
+
+. collapse (first) CountryCode if wbregion!=., by(country)
+
+. // save `source', replace
+. 
+. //
+. 
+. clear
+
+. use Dataset.dta, replace
+
+. tempfile TFR1960 // A file that contains the names and codes of countries and TFR in 1960.
+
+. keep if year == 1960
+(13,232 observations deleted)
+
+. keep country CountryCode TFR
+
+. rename TFR TFR1960
+
+. // save `TFR1960', replace
+. 
+end of do-file
+
+. use `source', replace
+
+. 
+. merge 1:1 country using `TFR1960', keep(master m
+> atch) nogen
+invalid file specification
+r(198);
+
+. merge 1:1 country using TFR1960, keep(master mat
+> ch) nogen
+file TFR1960.dta not found
+r(601);
+
+. merge 1:1 country using `TFR1960', nogen
+invalid file specification
+r(198);
+
+. clear all
+
+. 
+. use Dataset.dta, replace 
+
+. 
+. ************************************************
+> ********************************
+
+. 
+. // TABLE 1
+/ is not a valid command name
+r(199);
+
+. 
+. tabulate year fertpolicy if year == 1976 | year 
+> == 1986 | year == 1996 | year == 2005 | year == 
+> 2013
+
+           |  Policy on fertility
+           |  (from UN Population
+           |   Policy database)
+      Time |     Lower   Maintain |     Total
+-----------+----------------------+----------
+      1976 |        40         19 |       150 
+      1986 |        54         16 |       164 
+      1996 |        82         19 |       193 
+      2005 |        78         31 |       194 
+      2013 |        84         33 |       197 
+-----------+----------------------+----------
+     Total |       338        118 |       898 
+
+
+           |  Policy on fertility
+           |  (from UN Population
+           |   Policy database)
+      Time | No inte..      Raise |     Total
+-----------+----------------------+----------
+      1976 |        78         13 |       150 
+      1986 |        75         19 |       164 
+      1996 |        65         27 |       193 
+      2005 |        47         38 |       194 
+      2013 |        26         54 |       197 
+-----------+----------------------+----------
+     Total |       291        151 |       898 
+
+. 
+. // TABLE 2
+/ is not a valid command name
+r(199);
+
+. 
+. tab year gov_famplan if year == 1976 | year == 1
+> 986 | year == 1996 | year == 2005 | year == 2013
+
+           |   Govt support for
+           | family planning (from
+           |     UN Pop Policy
+           |       database)
+      Time | Direct ..  Indirec.. |     Total
+-----------+----------------------+----------
+      1976 |        95         17 |       150 
+      1986 |       117         22 |       164 
+      1996 |       143         18 |       193 
+      2005 |       143         35 |       194 
+      2013 |       160         20 |       197 
+-----------+----------------------+----------
+     Total |       658        112 |       898 
+
+
+           |   Govt support for
+           | family planning (from
+           |     UN Pop Policy
+           |       database)
+      Time |    Limits  No data.. |     Total
+-----------+----------------------+----------
+      1976 |        10          0 |       150 
+      1986 |         7          0 |       164 
+      1996 |         2          4 |       193 
+      2005 |         1          0 |       194 
+      2013 |         0          0 |       197 
+-----------+----------------------+----------
+     Total |        20          4 |       898 
+
+
+           |   Govt support for
+           | family planning (from
+           |     UN Pop Policy
+           |       database)
+      Time | No supp..  Not per.. |     Total
+-----------+----------------------+----------
+      1976 |        28          0 |       150 
+      1986 |        18          0 |       164 
+      1996 |        26          0 |       193 
+      2005 |        15          0 |       194 
+      2013 |        16          1 |       197 
+-----------+----------------------+----------
+     Total |       103          1 |       898 
+
+. 
+. // TABLE 3
+/ is not a valid command name
+r(199);
+
+. 
+. // Preparing the data for mutation
+/ is not a valid command name
+r(199);
+
+. 
+. save Dataset.dta, replace
+file Dataset.dta saved
+
+. tempfile source // A file that contains only the
+>  names and codes of the countries. 
+_/ invalid name
+r(198);
+
+. collapse (first) CountryCode if wbregion!=., by(
+> country)
+
+. save `source', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000002 not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000002 saved as .dta format
+
+. 
+. //
+/ is not a valid command name
+r(199);
+
+. 
+. 
+. use Dataset.dta, replace
+
+. tempfile TFR1960 // A file that contains the nam
+> es and codes of countries and TFR in 1960.
+_/ invalid name
+r(198);
+
+. keep if year == 1960
+(13,232 observations deleted)
+
+. keep country CountryCode TFR
+
+. rename TFR TFR1960
+
+. save `TFR1960', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000003 not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000003 saved as .dta format
+
+. 
+. use `source', replace
+
+. merge 1:1 country using `TFR1960', keep(master m
+> atch) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+> gn/T//SD18118.000000"
+
+. clear all
+
+. 
+. use Dataset.dta, replace 
+
+. 
+. shell mkdir "`current_dir'/tables" // Creating a
+>  new folder to store the tables
+
+mkdir: /tables: Read-only file system
+
+. 
+. ************************************************
+> ********************************
+. 
+. // TABLE 1
+. 
+. tabulate year fertpolicy if year == 1976 | year 
+> == 1986 | year == 1996 | year == 2005 | year == 
+> 2013
+
+           |  Policy on fertility
+           |  (from UN Population
+           |   Policy database)
+      Time |     Lower   Maintain |     Total
+-----------+----------------------+----------
+      1976 |        40         19 |       150 
+      1986 |        54         16 |       164 
+      1996 |        82         19 |       193 
+      2005 |        78         31 |       194 
+      2013 |        84         33 |       197 
+-----------+----------------------+----------
+     Total |       338        118 |       898 
+
+
+           |  Policy on fertility
+           |  (from UN Population
+           |   Policy database)
+      Time | No inte..      Raise |     Total
+-----------+----------------------+----------
+      1976 |        78         13 |       150 
+      1986 |        75         19 |       164 
+      1996 |        65         27 |       193 
+      2005 |        47         38 |       194 
+      2013 |        26         54 |       197 
+-----------+----------------------+----------
+     Total |       291        151 |       898 
+
+. 
+. // TABLE 2
+. 
+. tab year gov_famplan if year == 1976 | year == 1
+> 986 | year == 1996 | year == 2005 | year == 2013
+
+           |   Govt support for
+           | family planning (from
+           |     UN Pop Policy
+           |       database)
+      Time | Direct ..  Indirec.. |     Total
+-----------+----------------------+----------
+      1976 |        95         17 |       150 
+      1986 |       117         22 |       164 
+      1996 |       143         18 |       193 
+      2005 |       143         35 |       194 
+      2013 |       160         20 |       197 
+-----------+----------------------+----------
+     Total |       658        112 |       898 
+
+
+           |   Govt support for
+           | family planning (from
+           |     UN Pop Policy
+           |       database)
+      Time |    Limits  No data.. |     Total
+-----------+----------------------+----------
+      1976 |        10          0 |       150 
+      1986 |         7          0 |       164 
+      1996 |         2          4 |       193 
+      2005 |         1          0 |       194 
+      2013 |         0          0 |       197 
+-----------+----------------------+----------
+     Total |        20          4 |       898 
+
+
+           |   Govt support for
+           | family planning (from
+           |     UN Pop Policy
+           |       database)
+      Time | No supp..  Not per.. |     Total
+-----------+----------------------+----------
+      1976 |        28          0 |       150 
+      1986 |        18          0 |       164 
+      1996 |        26          0 |       193 
+      2005 |        15          0 |       194 
+      2013 |        16          1 |       197 
+-----------+----------------------+----------
+     Total |       103          1 |       898 
+
+. 
+. // TABLE 3
+. 
+. // Preparing the data for mutation
+. 
+. save Dataset.dta, replace
+file Dataset.dta saved
+
+. tempfile source // A file that contains only the
+>  names and codes of the countries. 
+
+. collapse (first) CountryCode if wbregion!=., by(
+> country)
+
+. save `source', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000004 not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000004 saved as .dta format
+
+. 
+. //
+. 
+. 
+. use Dataset.dta, replace
+
+. tempfile TFR1960 // A file that contains the nam
+> es and codes of countries and TFR in 1960.
+
+. keep if year == 1960
+(13,232 observations deleted)
+
+. keep country CountryCode TFR
+
+. rename TFR TFR1960
+
+. save `TFR1960', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000005 not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000005 saved as .dta format
+
+. 
+. //
+. 
+. use Dataset.dta, replace
+
+. tempfile TFR2013 // A file that contains the nam
+> es and codes of countries and TFR in 2013.
+
+. keep if year == 2013
+(13,199 observations deleted)
+
+. keep country CountryCode TFR
+
+. rename TFR TFR2013
+
+. save `TFR2013', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000006 not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000006 saved as .dta format
+
+. 
+. //
+. 
+. use Dataset.dta, replace
+
+. tempfile funds // A file containing names of cou
+> ntries and family planning funds
+
+. gen fund = FPP_total_percapita/CPI_2005
+(13,079 missing values generated)
+
+. keep if year > 1969 & year < 2000
+(5,831 observations deleted)
+
+. collapse (mean) fund, by(country)
+
+. save `funds', replace 
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000007 not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000007 saved as .dta format
+
+. 
+. // 
+. 
+. use Dataset.dta, replace
+
+. tempfile effort // A file containing names of co
+> untries and famiyl planning efforts
+
+. keep if year > 1969 & year < 2000
+(5,831 observations deleted)
+
+. collapse (mean) prog_effort_score, by(country)
+
+. ren prog_effort_score effort
+
+. save `effort', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000008 not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000008 saved as .dta format
+
+. 
+. //
+. 
+. use Dataset.dta, replace
+
+. tempfile exposure // A file containing names of 
+> countries and exposure to family planning progra
+> m
+
+. keep if year <= 2005
+(2,045 observations deleted)
+
+. sort country year
+
+. collapse (firstnm) exposure_FP, by(country)
+
+. ren exposure_FP exposure
+
+. save `exposure', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000009 not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.000009 saved as .dta format
+
+. 
+. // 
+. 
+. use Dataset.dta, replace
+
+. tempfile urbanpop_school // Urban population and
+>  years of schooling in 1960 
+
+. keep if year == 1960
+(13,232 observations deleted)
+
+. keep country CountryCode urban_pop_tot yr_sch
+
+. rename urban_pop_tot urbanpop1960
+
+. rename yr_sch school1960
+
+. save `urbanpop_school', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000a not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000a saved as .dta format
+
+. 
+. // 
+. 
+. use Dataset.dta, replace
+
+. tempfile pcgdp //Per capita GDP in the first yea
+> r before and including 1965 
+
+. keep if year <= 1965
+(12,107 observations deleted)
+
+. sort country year
+
+. collapse (firstnm) gdp_percapita, by(country)
+
+. rename gdp_percapita gdp1965
+
+. save `pcgdp', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000b not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000b saved as .dta format
+
+. 
+. 
+. // 
+. 
+. use Dataset.dta, replace
+
+. tempfile imr //Infant Mortality Rate in the firs
+> t year before and including 1965
+
+. keep if year <= 1965
+(12,107 observations deleted)
+
+. sort country year
+
+. collapse (firstnm) IMR, by(country)
+
+. rename IMR imr1965
+
+. count if imr1965!=.
+  124
+
+. save `imr', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000c not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000c saved as .dta format
+
+. 
+. // 
+. 
+. use Dataset.dta, replace
+
+. tempfile urbanpop_2013 //Urban population in 201
+> 3
+
+. keep if year == 2013
+(13,199 observations deleted)
+
+. keep country CountryCode urban_pop_tot
+
+. rename urban_pop_tot urbanpop2013
+
+. save `urbanpop_2013', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000d not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000d saved as .dta format
+
+. 
+. //
+. 
+. use Dataset.dta, replace
+
+. tempfile school2010 // Years of schooling in 201
+> 0
+
+. keep if year == 2010
+(13,203 observations deleted)
+
+. keep country CountryCode yr_sch
+
+. rename yr_sch school2010
+
+. save `school2010', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000e not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000e saved as .dta format
+
+. 
+. // 
+. 
+. use Dataset.dta, replace
+
+. tempfile gdp2013 //Per capita gdp in 2013
+
+. keep if year == 2013
+(13,199 observations deleted)
+
+. keep country CountryCode gdp_percapita
+
+. rename gdp_percapita gdp2013
+
+. save `gdp2013', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000f not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000f saved as .dta format
+
+. 
+. // 
+. 
+. use Dataset.dta, replace
+
+. tempfile imr2013 // Infant Mortality Rate in 201
+> 3
+
+. keep if year == 2013
+(13,199 observations deleted)
+
+. keep country CountryCode IMR
+
+. rename IMR imr2013
+
+. save `imr2013', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000g not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000g saved as .dta format
+
+. 
+. // Merging the datasets for the required regress
+> ions
+. 
+. use `source', replace
+
+. merge 1:1 country using `TFR1960', keep(master m
+> atch) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `TFR2013', keep(master m
+> atch) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `funds', keep(master mat
+> ch) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `effort', keep(master ma
+> tch) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `exposure', keep(master 
+> match) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `urbanpop_school', keep(
+> master match) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `pcgdp', keep(master mat
+> ch) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `imr', keep(master match
+> ) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `urbanpop_2013', keep(ma
+> ster match) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `school2010', keep(maste
+> r match) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `gdp2013', keep(master m
+> atch) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. merge 1:1 country using `imr2013', keep(master m
+> atch) nogen
+
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                             0
+    Matched                               214  
+    -----------------------------------------
+
+. 
+. tempfile mergeddata
+
+. 
+. // Generating other variables as per required
+. 
+. gen TFRdiff = TFR2013 - TFR1960 // Change in TFR
+(24 missing values generated)
+
+. gen TFRpct = (TFRdiff/TFR1960)*100 // PCT Change
+>  in TFR
+(24 missing values generated)
+
+. gen popdiff = urbanpop2013 - urbanpop1960 // Cha
+> nge in Urban Population
+(5 missing values generated)
+
+. gen poppct = (popdiff/urbanpop1960)*100 // PCT C
+> hange in Urban Population
+(5 missing values generated)
+
+. gen schooldiff = school2010 - school1960 // Chan
+> ge in Schooling
+(70 missing values generated)
+
+. gen schoolpct = (schooldiff/school1960)*100 // P
+> CT Change in Schooling
+(70 missing values generated)
+
+. gen imrdiff = imr2013 - imr1965 // Change in IMR
+(96 missing values generated)
+
+. gen imrpct = (imrdiff/imr1965)*100 // PCT Change
+>  in IMR
+(96 missing values generated)
+
+. gen lngdp2013 = ln(gdp2013) // Change in natural
+>  log of gdp
+(23 missing values generated)
+
+. gen lngdp1965 = ln(gdp1965)
+(118 missing values generated)
+
+. gen lngdpdiff = lngdp2013 - lngdp1965
+(118 missing values generated)
+
+. gen lngdppct = (lngdpdiff/lngdp1965)*100 // PCT 
+> Change in natural log of gdp
+(118 missing values generated)
+
+. gen lnfund = ln(fund) // Natural Log of Fund
+(158 missing values generated)
+
+. 
+. save `mergeddata', replace
+(file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000h not found)
+file
+    /var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+    > gn/T//S_18118.00000h saved as .dta format
+
+. 
+end of do-file
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+> gn/T//SD18118.000000"
+
+. use `mergeddata', replace
+invalid file specification
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+> gn/T//SD18118.000000"
+
+. reg TFRdiff lnfund, vce(r)
+
+Linear regression                               Nu
+> mber of obs     =         56
+                                                F(
+> 1, 54)          =      27.34
+                                                Pr
+> ob > F          =     0.0000
+                                                R-
+> squared         =     0.3488
+                                                Ro
+> ot MSE          =     1.1553
+
+--------------------------------------------------
+> ----------------------------
+             |               Robust
+     TFRdiff | Coefficient  std. err.      t    P>
+> |t|                                             
+>         [95% con                                
+>                 f. interval]
+-------------+------------------------------------
+> ----------------------------
+      lnfund |  -.6300696   .1204991    -5.23   0.
+> 000                                             
+>        -.8716558                                
+>                    -.3884834
+       _cons |   -1.07805   .4776678    -2.26   0.
+> 028                                             
+>        -2.035717                                
+>                    -.1203842
+--------------------------------------------------
+> ----------------------------
+
+. est sto m1
+
+. reg TFRdiff lnfund schooldiff popdiff lngdpdiff 
+> imrdiff, vce(r)
+
+Linear regression                               Nu
+> mber of obs     =         37
+                                                F(
+> 5, 31)          =       3.58
+                                                Pr
+> ob > F          =     0.0114
+                                                R-
+> squared         =     0.3888
+                                                Ro
+> ot MSE          =     .95112
+
+--------------------------------------------------
+> ----------------------------
+             |               Robust
+     TFRdiff | Coefficient  std. err.      t    P>
+> |t|                                             
+>         [95% con                                
+>                 f. interval]
+-------------+------------------------------------
+> ----------------------------
+      lnfund |  -.4281378   .1815577    -2.36   0.
+> 025                                             
+>        -.7984271                                
+>                    -.0578485
+  schooldiff |  -.1322515   .1324945    -1.00   0.
+> 326                                             
+>        -.4024758                                
+>                     .1379727
+     popdiff |  -.0078832   .0087036    -0.91   0.
+> 372                                             
+>        -.0256343                                
+>                     .0098679
+   lngdpdiff |   -.420852   .2278965    -1.85   0.
+> 074                                             
+>          -.88565                                
+>                      .043946
+     imrdiff |   .0060955   .0032165     1.90   0.
+> 067                                             
+>        -.0004645                                
+>                     .0126555
+       _cons |   -.077485   1.152631    -0.07   0.
+> 947                                             
+>        -2.428292                                
+>                     2.273322
+--------------------------------------------------
+> ----------------------------
+
+. est sto m2
+
+. reg TFRpct lnfund, vce(r)
+
+Linear regression                               Nu
+> mber of obs     =         56
+                                                F(
+> 1, 54)          =      49.55
+                                                Pr
+> ob > F          =     0.0000
+                                                R-
+> squared         =     0.4180
+                                                Ro
+> ot MSE          =     16.594
+
+--------------------------------------------------
+> ----------------------------
+             |               Robust
+      TFRpct | Coefficient  std. err.      t    P>
+> |t|                                             
+>         [95% con                                
+>                 f. interval]
+-------------+------------------------------------
+> ----------------------------
+      lnfund |  -10.48064   1.488913    -7.04   0.
+> 000                                             
+>        -13.46573                                
+>                    -7.495548
+       _cons |  -13.78435   6.419345    -2.15   0.
+> 036                                             
+>        -26.65436                                
+>                    -.9143393
+--------------------------------------------------
+> ----------------------------
+
+. est sto m3
+
+. rename schoolpct schooldiff
+variable schooldiff already defined
+r(110);
+
+end of do-file
+
+r(110);
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+> gn/T//SD18118.000000"
+
+. reg TFRdiff lnfund, vce(r)
+
+Linear regression                               Nu
+> mber of obs     =         56
+                                                F(
+> 1, 54)          =      27.34
+                                                Pr
+> ob > F          =     0.0000
+                                                R-
+> squared         =     0.3488
+                                                Ro
+> ot MSE          =     1.1553
+
+--------------------------------------------------
+> ----------------------------
+             |               Robust
+     TFRdiff | Coefficient  std. err.      t    P>
+> |t|                                             
+>         [95% con                                
+>                 f. interval]
+-------------+------------------------------------
+> ----------------------------
+      lnfund |  -.6300696   .1204991    -5.23   0.
+> 000                                             
+>        -.8716558                                
+>                    -.3884834
+       _cons |   -1.07805   .4776678    -2.26   0.
+> 028                                             
+>        -2.035717                                
+>                    -.1203842
+--------------------------------------------------
+> ----------------------------
+
+. est sto m1
+
+. reg TFRdiff lnfund schooldiff popdiff lngdpdiff 
+> imrdiff, vce(r)
+
+Linear regression                               Nu
+> mber of obs     =         37
+                                                F(
+> 5, 31)          =       3.58
+                                                Pr
+> ob > F          =     0.0114
+                                                R-
+> squared         =     0.3888
+                                                Ro
+> ot MSE          =     .95112
+
+--------------------------------------------------
+> ----------------------------
+             |               Robust
+     TFRdiff | Coefficient  std. err.      t    P>
+> |t|                                             
+>         [95% con                                
+>                 f. interval]
+-------------+------------------------------------
+> ----------------------------
+      lnfund |  -.4281378   .1815577    -2.36   0.
+> 025                                             
+>        -.7984271                                
+>                    -.0578485
+  schooldiff |  -.1322515   .1324945    -1.00   0.
+> 326                                             
+>        -.4024758                                
+>                     .1379727
+     popdiff |  -.0078832   .0087036    -0.91   0.
+> 372                                             
+>        -.0256343                                
+>                     .0098679
+   lngdpdiff |   -.420852   .2278965    -1.85   0.
+> 074                                             
+>          -.88565                                
+>                      .043946
+     imrdiff |   .0060955   .0032165     1.90   0.
+> 067                                             
+>        -.0004645                                
+>                     .0126555
+       _cons |   -.077485   1.152631    -0.07   0.
+> 947                                             
+>        -2.428292                                
+>                     2.273322
+--------------------------------------------------
+> ----------------------------
+
+. est sto m2
+
+. reg TFRpct lnfund, vce(r)
+
+Linear regression                               Nu
+> mber of obs     =         56
+                                                F(
+> 1, 54)          =      49.55
+                                                Pr
+> ob > F          =     0.0000
+                                                R-
+> squared         =     0.4180
+                                                Ro
+> ot MSE          =     16.594
+
+--------------------------------------------------
+> ----------------------------
+             |               Robust
+      TFRpct | Coefficient  std. err.      t    P>
+> |t|                                             
+>         [95% con                                
+>                 f. interval]
+-------------+------------------------------------
+> ----------------------------
+      lnfund |  -10.48064   1.488913    -7.04   0.
+> 000                                             
+>        -13.46573                                
+>                    -7.495548
+       _cons |  -13.78435   6.419345    -2.15   0.
+> 036                                             
+>        -26.65436                                
+>                    -.9143393
+--------------------------------------------------
+> ----------------------------
+
+. est sto m3
+
+. reg TFRpct lnfund schoolpct poppct lngdppct imrp
+> ct, vce(r)
+
+Linear regression                               Nu
+> mber of obs     =         37
+                                                F(
+> 5, 31)          =      47.58
+                                                Pr
+> ob > F          =     0.0000
+                                                R-
+> squared         =     0.7180
+                                                Ro
+> ot MSE          =     9.2726
+
+--------------------------------------------------
+> ----------------------------
+             |               Robust
+      TFRpct | Coefficient  std. err.      t    P>
+> |t|                                             
+>         [95% con                                
+>                 f. interval]
+-------------+------------------------------------
+> ----------------------------
+      lnfund |  -4.917471   2.024895    -2.43   0.
+> 021                                             
+>        -9.047272                                
+>                      -.78767
+   schoolpct |   .0008293   .0019902     0.42   0.
+> 680                                             
+>        -.0032297                                
+>                     .0048882
+      poppct |   .0005425   .0034681     0.16   0.
+> 877                                             
+>        -.0065307                                
+>                     .0076157
+    lngdppct |  -.3783766   .1585347    -2.39   0.
+> 023                                             
+>        -.7017103                                
+>                    -.0550429
+      imrpct |   .6704829   .1320633     5.08   0.
+> 000                                             
+>         .4011379                                
+>                     .9398278
+       _cons |   20.03876   9.482634     2.11   0.
+> 043                                             
+>         .6988002                                
+>                     39.37872
+--------------------------------------------------
+> ----------------------------
+
+. est sto m4
+
+. 
+end of do-file
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+> gn/T//SD18118.000000"
+
+. esttab m1 m2 m3 m4, b se stats(N r2) using "`cur
+> rent_dir'/tables/table3.doc"
+option using not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+> gn/T//SD18118.000000"
+
+. esttab using "`current_dir'/tables/table3.doc" m
+> 1 m2 m3 m4, b se stats(N r2)
+invalid 'm1' 
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+> gn/T//SD18118.000000"
+
+. esttab using "`current_dir'/tables/table3.doc", 
+> m1 m2 m3 m4 b se stats(N r2)
+option m1 not allowed
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "/var/folders/yd/k3n9_0_n7tg29t7skslhtnqh0000
+> gn/T//SD18118.000000"
+
+. esttab m1 m2 m3 m4 using "`current_dir'/tables/t
+> able3.doc", b se stats(N r2)
+file /tables/table3.doc could not be opened
+r(603);
+
+end of do-file
+
+r(603);
+
+. shell mkdir "`current_dir'/tables" // Creating a
+>  new folder to store the tables
+
+mkdir: /tables: Read-only file system
+mkdir: //: File exists
+
+. esttab m1 m2 m3 m4 using "`current_dir'/tables/t
+> able3.docx", b se stats(N r2)
+file /tables/table3.docx could not be opened
+r(603);
+
+. esttab m1 m2 m3 m4 using "`current_dir'/tables/t
+> able3.doc", b se stats(N r2)
+file /tables/table3.doc could not be opened
+r(603);
+
+. reg TFRdiff lnfund, vce(r)
+
+Linear regression                               Number of obs     =         56
+                                                F(1, 54)          =      27.34
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.3488
+                                                Root MSE          =     1.1553
+
+------------------------------------------------------------------------------
+             |               Robust
+     TFRdiff | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      lnfund |  -.6300696   .1204991    -5.23   0.000    -.8716558   -.3884834
+       _cons |   -1.07805   .4776678    -2.26   0.028    -2.035717   -.1203842
+------------------------------------------------------------------------------
+
+. est sto m1
+
+. reg TFRdiff lnfund schooldiff popdiff lngdpdiff imrdiff, vce(r)
+
+Linear regression                               Number of obs     =         37
+                                                F(5, 31)          =       3.58
+                                                Prob > F          =     0.0114
+                                                R-squared         =     0.3888
+                                                Root MSE          =     .95112
+
+------------------------------------------------------------------------------
+             |               Robust
+     TFRdiff | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      lnfund |  -.4281378   .1815577    -2.36   0.025    -.7984271   -.0578485
+  schooldiff |  -.1322515   .1324945    -1.00   0.326    -.4024758    .1379727
+     popdiff |  -.0078832   .0087036    -0.91   0.372    -.0256343    .0098679
+   lngdpdiff |   -.420852   .2278965    -1.85   0.074      -.88565     .043946
+     imrdiff |   .0060955   .0032165     1.90   0.067    -.0004645    .0126555
+       _cons |   -.077485   1.152631    -0.07   0.947    -2.428292    2.273322
+------------------------------------------------------------------------------
+
+. est sto m2
+
+. reg TFRpct lnfund, vce(r)
+
+Linear regression                               Number of obs     =         56
+                                                F(1, 54)          =      49.55
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.4180
+                                                Root MSE          =     16.594
+
+------------------------------------------------------------------------------
+             |               Robust
+      TFRpct | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      lnfund |  -10.48064   1.488913    -7.04   0.000    -13.46573   -7.495548
+       _cons |  -13.78435   6.419345    -2.15   0.036    -26.65436   -.9143393
+------------------------------------------------------------------------------
+
+. est sto m3
+
+. reg TFRpct lnfund schoolpct poppct lngdppct imrpct, vce(r)
+
+Linear regression                               Number of obs     =         37
+                                                F(5, 31)          =      47.58
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.7180
+                                                Root MSE          =     9.2726
+
+------------------------------------------------------------------------------
+             |               Robust
+      TFRpct | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      lnfund |  -4.917471   2.024895    -2.43   0.021    -9.047272     -.78767
+   schoolpct |   .0008293   .0019902     0.42   0.680    -.0032297    .0048882
+      poppct |   .0005425   .0034681     0.16   0.877    -.0065307    .0076157
+    lngdppct |  -.3783766   .1585347    -2.39   0.023    -.7017103   -.0550429
+      imrpct |   .6704829   .1320633     5.08   0.000     .4011379    .9398278
+       _cons |   20.03876   9.482634     2.11   0.043     .6988002    39.37872
+------------------------------------------------------------------------------
+
+. est sto m4
+
+. esttab m1 m2 m3 m4 using "`current_dir'/tables/table3.rtf", b se stats(N r2)
+file /tables/table3.rtf could not be opened
+r(603);
+
+. esttab m1 m2 m3 m4 using "`current_dir'/tables/table3.tex", b se stats(N r2)
+file /tables/table3.tex could not be opened
+r(603);
+
+. qu reg TFRdiff lnfund, vce(r)
+invalid syntax
+r(198);
+
+. est sto m1
+
+. qu reg TFRdiff lnfund schooldiff popdiff lngdpdiff imrdiff, vce(r)
+invalid syntax
+r(198);
+
+. est sto m2
+
+. qu reg TFRpct lnfund, vce(r)
+invalid syntax
+r(198);
+
+. est sto m3
+
+. qu reg TFRpct lnfund schoolpct poppct lngdppct imrpct, vce(r)
+invalid syntax
+r(198);
+
+. est sto m4
+
+. esttab m1 m2 m3 m4, b se stats(N r2)
+
+----------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)   
+                   TFRpct          TFRpct          TFRpct          TFRpct   
+----------------------------------------------------------------------------
+lnfund             -4.917*         -4.917*         -4.917*         -4.917*  
+                  (2.025)         (2.025)         (2.025)         (2.025)   
+
+schoolpct        0.000829        0.000829        0.000829        0.000829   
+                (0.00199)       (0.00199)       (0.00199)       (0.00199)   
+
+poppct           0.000543        0.000543        0.000543        0.000543   
+                (0.00347)       (0.00347)       (0.00347)       (0.00347)   
+
+lngdppct           -0.378*         -0.378*         -0.378*         -0.378*  
+                  (0.159)         (0.159)         (0.159)         (0.159)   
+
+imrpct              0.670***        0.670***        0.670***        0.670***
+                  (0.132)         (0.132)         (0.132)         (0.132)   
+
+_cons               20.04*          20.04*          20.04*          20.04*  
+                  (9.483)         (9.483)         (9.483)         (9.483)   
+----------------------------------------------------------------------------
+N                      37              37              37              37   
+r2                  0.718           0.718           0.718           0.718   
+----------------------------------------------------------------------------
+Standard errors in parentheses
+* p<0.05, ** p<0.01, *** p<0.001
+
+. esttab using "`current_dir'/tables/table3.tex", replace
+(file /tables/table3.tex not found)
+file /tables/table3.tex could not be opened
+r(603);
+
+. quietly reg TFRdiff lnfund, vce(r)
+
+. est sto m1
+
+. quietly reg TFRdiff lnfund schooldiff popdiff lngdpdiff imrdiff, vce(r)
+
+. est sto m2
+
+. quietly reg TFRpct lnfund, vce(r)
+
+. est sto m3
+
+. quietly reg TFRpct lnfund schoolpct poppct lngdppct imrpct, vce(r)
+
+. est sto m4
+
+. esttab m1 m2 m3 m4, b se stats(N r2)
+
+----------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)   
+                  TFRdiff         TFRdiff          TFRpct          TFRpct   
+----------------------------------------------------------------------------
+lnfund             -0.630***       -0.428*         -10.48***       -4.917*  
+                  (0.120)         (0.182)         (1.489)         (2.025)   
+
+schooldiff                         -0.132                                   
+                                  (0.132)                                   
+
+popdiff                          -0.00788                                   
+                                (0.00870)                                   
+
+lngdpdiff                          -0.421                                   
+                                  (0.228)                                   
+
+imrdiff                           0.00610                                   
+                                (0.00322)                                   
+
+schoolpct                                                        0.000829   
+                                                                (0.00199)   
+
+poppct                                                           0.000543   
+                                                                (0.00347)   
+
+lngdppct                                                           -0.378*  
+                                                                  (0.159)   
+
+imrpct                                                              0.670***
+                                                                  (0.132)   
+
+_cons              -1.078*        -0.0775          -13.78*          20.04*  
+                  (0.478)         (1.153)         (6.419)         (9.483)   
+----------------------------------------------------------------------------
+N                      56              37              56              37   
+r2                  0.349           0.389           0.418           0.718   
+----------------------------------------------------------------------------
+Standard errors in parentheses
+* p<0.05, ** p<0.01, *** p<0.001
+
+. 
