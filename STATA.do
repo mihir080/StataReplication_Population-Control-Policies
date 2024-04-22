@@ -49,7 +49,7 @@ title("Panel Chart Of TRF's Across Periods") ///
 note("Data: Population Control Policies and Fertility Convergence") ///
 name(fig1)
 
-** graph export "`current_dir'/figures/fig1.png", replace
+graph export "`current_dir'/figures/fig1.png", replace
 
 
 // FIGURE 2
@@ -62,7 +62,7 @@ codebook wbregion /// To get the index codes for each of the regions
 
 twoway (line TFR year if wbregion == 1) (line TFR year if wbregion == 2, lpattern(dash)) (line TFR year if wbregion == 3, lpattern(longdash)) (line TFR year if wbregion == 4, lpattern(longdash_dot)) (line TFR year if wbregion == 5, lpattern(shortdash)) (line TFR year if wbregion == 6, lpattern(shortdash_dot)) (line TFR year if wbregion == 7, lpattern(dash_dot)), ytitle("Total Fertility Rate") xtitle("Years") legend(order(1 "North America" 2 "Europe and Central Asia" 3 "East Asia and Pacific" 4 "Latin America" 5 "Middle East and North Africa" 6 "South Asia" 7 "Sub Saharan Africa") size(small) span position(6) rows(2)) title("Total Fertility Rate Across Periods By Region") note("Data: de Silva, Tenreyro 2017") name(fig2)
 
-** graph export "`current_dir'/figures/fig2.png", replace
+graph export "`current_dir'/figures/fig2.png", replace
 
 use Dataset.dta, replace 
 
@@ -70,13 +70,13 @@ use Dataset.dta, replace
 
 twoway (scatter TFR ln_gdp if year == 1960, msymbol(circle) mfcolor(white)) (lowess TFR ln_gdp if year == 1960 & wbregion!=.) (scatter TFR ln_gdp if year == 2013, msymbol(triangle) mfcolor(blue)) (lowess TFR ln_gdp if year == 2013 & wbregion!=.), legend(order(1 "1960" 3 "2013" 2 "Fitted 1960" 4 "Fitted 2013") rows(1) size(small) position(6)) title("Fertility GDP Relation in 1960 & 2013") ytitle("TFR") xtitle("GDP per capita ($)") note("Data: de Silva, Tenreyro 2017") name(fig3)
 
-** graph export "`current_dir'/figures/fig3.png", replace
+graph export "`current_dir'/figures/fig3.png", replace
 
 // FIGURE 4
 
 twoway (scatter TFR urban_pop_tot if year == 1960, msymbol(circle) mfcolor(white)) (lowess TFR urban_pop_tot if year == 1960 & wbregion!=.) (scatter TFR urban_pop_tot if year == 2013, msymbol(triangle) mfcolor(blue)) (lowess TFR urban_pop_tot if year == 2013 & wbregion!=.), legend(order(1 "1960" 3 "2013" 2 "Fitted 1960" 4 "Fitted 2013") rows(1) size(small) position(6)) title("Fertility Population Relation in 1960 & 2013") ytitle("TFR") xtitle("Urban Population (as a % of total population)") note("Data: de Silva, Tenreyro 2017") name(fig4)
 
-** graph export "`current_dir'/figures/fig4.png", replace
+graph export "`current_dir'/figures/fig4.png", replace
 
 // FIGURE 5
 
@@ -92,7 +92,7 @@ collapse (mean) TFR [fw=population], by(year fpcode76all) //Collapsing data to k
 
 twoway (line TFR year if fpcode76all == 1) (line TFR year if fpcode76all == 2) (line TFR year if fpcode76all == 3) (line TFR year if fpcode76all == 4) if year > 1959 & year < 2011, xlabel(1960(10)2011) legend(order(1 "Lower" 2 "No Intervention" 3 "Maintain" 4 "Raise") size(small) span position(6) rows(2)) xscale(range(1960 2011)) ytitle("Mean TFR") xtitle("Years") title("Fertility Rates by Policy in 1976") note("Data: de Silva, Tenreyro 2017") name(fig5)
 
-** graph export "`current_dir'/figures/fig5.png", replace
+graph export "`current_dir'/figures/fig5.png", replace
 
 save `fig5', replace
 
@@ -103,8 +103,6 @@ save `fig5', replace
 clear all
 
 use Dataset.dta, replace 
-
-shell mkdir "`current_dir'/tables" 
 
 ********************************************************************************
 
@@ -313,5 +311,162 @@ est sto m12
 esttab m9 m10 m11 m12, b se stats(N r2)
 
 ********************************************************************************
+
+// Descriptive reference graphs
+
+// Explanatory Graphs
+
+// Urban Population 1960
+
+hist urbanpop1960, bins(20) kdensity name(fig1, replace) ///
+xtitle("Urban Population (as % of total population)") ytitle("Density") ///
+title("Urban Population By Country - 1960") ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Schooling 1960
+
+hist school1960, bins(20) kdensity name(fig2, replace) ///
+xtitle("Years of Schooling") ytitle("Density") ///
+title("Years of Schooling 25+ Population - 1960") ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Per capita gdp 1965
+
+hist gdp1965, bins(20) kdensity name(fig3, replace) ///
+xtitle("Per Capita GDP") ytitle("Density") ///
+title("Per Capita GDP Before 1965") ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// IMR 1965
+
+hist imr1965, bins(20) kdensity name(fig4, replace) ///
+xtitle("Infant Mortality Rate") ytitle("Density") ///
+title("Infant Mortality Rate Before 1965") ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Urban Population 2013
+
+hist urbanpop2013, bins(20) kdensity name(fig5, replace) ///
+xtitle("Urban Population (as % of total population)") ytitle("Density") ///
+title("Urban Population By Country - 2013") ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Schooling 2010
+
+hist school2010, bins(20) kdensity name(fig6, replace) ///
+xtitle("Years of Schooling") ytitle("Density") ///
+title("Years of Schooling 25+ Population - 2010") ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Per capita gdp 2013
+
+hist gdp2013, bins(20) kdensity name(fig7, replace) ///
+xtitle("Per Capita GDP") ytitle("Density") ///
+title("Per Capita GDP - 2013") ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// IMR 2013
+
+hist imr2013, bins(20) kdensity name(fig8, replace) ///
+xtitle("Infant Mortality Rate") ytitle("Density") ///
+title("Infant Mortality Rate - 2013") ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Generating graphs
+
+// Change in TFR
+
+hist TFRdiff, bins(20) kdensity name(figa, replace) ///
+xtitle("Change in TFR") ytitle("Density") ///
+title("Change In TFR From 1960 to 2013", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Change in TFR Pct
+
+hist TFRpct, bins(20) kdensity name(figb, replace) ///
+xtitle("Percent Change in TFR") ytitle("Density") ///
+title("Percent Change In TFR From 1960 to 2013", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Change in Urban Population
+
+hist popdiff, bins(20) kdensity name(figc, replace) ///
+xtitle("Change in Urban Population") ytitle("Density") ///
+title("Change In Urban Population From 1960 to 2013", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Percentage Change in Urban Population
+
+hist poppct, bins(20) kdensity name(figd, replace) ///
+xtitle("Percentage Change in Urban Population") ytitle("Density") ///
+title("Percentage Change In Urban Population From 1960 to 2013", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Change in Schooling
+
+hist schooldiff, bins(20) kdensity name(fige, replace) ///
+xtitle("Change in Years of Schooling") ytitle("Density") ///
+title("Change In Years Of Schooling(Age 25+) From 1960 to 2013", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Percentage Change in Schooling
+
+hist schoolpct, bins(20) kdensity name(figf, replace) ///
+xtitle("Percentage Change in Years of Schooling") ytitle("Density") ///
+title("Percentage Change In Years Of Schooling(Age 25+) From 1960 to 2013", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Change in IMR
+
+hist imrdiff, bins(20) kdensity name(figg, replace) ///
+xtitle("Change in Infant Mortality Rate") ytitle("Density") ///
+title("Change In Infant Mortality Rate From 1965 to 2013", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Percentage Change in IMR
+
+hist imrpct, bins(20) kdensity name(figh, replace) ///
+xtitle("Percentage Change in Infant Mortality Rate") ytitle("Density") ///
+title("Percentage Change In Infant Mortality Rate From 1965 to 2013", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Change in Natural Log of Per capita GDP
+
+hist lngdpdiff, bins(20) kdensity name(figi, replace) ///
+xtitle("Change in Ln Percapita GDP") ytitle("Density") ///
+title("Change In Ln Percapita GDP From 1965 to 2013", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Percentage Change in Natural Log of Per capita GDP
+
+hist lngdppct, bins(20) kdensity name(figj, replace) ///
+xtitle("Percentage Change in Ln Percapita GDP") ytitle("Density") ///
+title("Percentage Change In Ln Percapita GDP From 1965 to 2013", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Natural Log of Fund
+
+kdensity fund, name(figk, replace) ///
+xtitle("Family Planning Funds") ytitle("Density") ///
+title("Ln Of Family Planning Funds By Country", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// FFP Efforts
+
+kdensity effort, name(figl, replace) ///
+xtitle("Score For Effort") ytitle("Density") ///
+title("Family Planning Program Effort Score", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+// Exposure to Family program
+
+kdensity exposure, name(figm, replace) ///
+xtitle("Exposure") ytitle("Density") ///
+title("Percentage Of Women Exposed To Family Planning Messages", size(medium)) ///
+note("Data: Population Control Policies and Fertility Convergence")
+
+
+********************************************************************************
+
 
 log close 
